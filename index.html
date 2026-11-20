@@ -23,14 +23,75 @@ label{font-size:12px;font-weight:700;color:#687284;display:block;margin:0 0 5px}
 @media(max-width:900px){.app{margin:10px;padding:18px}.topnav{flex-wrap:wrap;gap:12px}.navlinks{order:3;flex-basis:100%;overflow:auto;flex-wrap:nowrap}.search{margin-left:auto}.cols-main{grid-template-columns:1fr}.cards4{grid-template-columns:repeat(2,1fr)}.hourrow{grid-template-columns:95px 1fr 1fr}.hourrow .statusfield{grid-column:2/-1}}
 @media(max-width:620px){.app{margin:0;border-radius:0;padding:13px 11px;min-height:100vh}.pagehead h1{font-size:23px}.card{padding:14px}.cards4,.cols-2,.reviewgrid{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr 1fr}.field.span2{grid-column:span 2}.hourrow{grid-template-columns:1fr}.hourtime{padding:0}.hourrow .statusfield{grid-column:auto}.task{grid-template-columns:20px minmax(0,1fr) auto;gap:7px}.task .pill.priority{grid-column:2}.task .taskactions{grid-column:3;grid-row:1/3}.search{min-width:0;flex:1}.search input{min-width:40px}.tablewrap{overflow-x:auto}}
 @media print{body{background:#fff}.app{margin:0;padding:0;box-shadow:none;max-width:none}.topnav,.no-print,.btn{display:none!important}.page{display:none!important}.page.active{display:block!important}.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid}}
-</style>
-<link rel="manifest" href="./manifest.webmanifest">
-<meta name="theme-color" content="#4d79f6">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="OfficeFlow">
-<link rel="apple-touch-icon" href="./apple-touch-icon.png">
-</head><body><div class="app">
+
+/* Mobile-first refinements */
+@media (max-width: 620px) {
+  body { font-size: 14px; padding-bottom: 76px; }
+  .app { width: 100%; margin: 0; padding: 12px 10px 88px; border-radius: 0; min-height: 100vh; }
+  .topnav { display: flex; flex-wrap: wrap; gap: 9px; margin: 0 0 18px; }
+  .brand { font-size: 15px; }
+  .logo { width: 35px; height: 35px; }
+  .search { order: 2; flex: 1 1 calc(100% - 95px); min-width: 0; }
+  .iconbtn { order: 2; flex: 0 0 36px; }
+  .navlinks {
+    position: fixed; z-index: 100; left: 0; right: 0; bottom: 0;
+    order: 5; flex: none; width: 100%; display: flex; flex-wrap: nowrap;
+    gap: 2px; padding: 7px 5px max(7px, env(safe-area-inset-bottom));
+    background: rgba(255,255,255,.98); border-top: 1px solid #e6eaf0;
+    box-shadow: 0 -5px 18px #172b4d12; overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .navlinks button { flex: 1 0 auto; min-width: 62px; padding: 9px 7px; font-size: 10px; white-space: nowrap; border-bottom: 0; border-radius: 9px; }
+  .navlinks button.active { background: #e9efff; color: #315ac3; }
+  .pagehead { align-items: flex-start; margin: 5px 0 15px; }
+  .pagehead h1 { font-size: 22px; line-height: 1.2; }
+  .pagehead p { font-size: 12px; }
+  .pagehead > .actions { width: 100%; }
+  .pagehead input[type=date] { flex: 1; width: auto !important; min-width: 0; }
+  .grid { gap: 11px; }
+  .cards4 { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px; }
+  .stat { padding: 12px; }
+  .stat strong { font-size: 23px; }
+  .card { padding: 14px 12px; border-radius: 13px; }
+  .card h2 { font-size: 15px; }
+  .cols-main, .cols-2 { grid-template-columns: minmax(0,1fr); }
+  .formgrid { grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 9px; }
+  .field.span2, .field.full { grid-column: 1 / -1; }
+  .formgrid .field button { width: 100%; min-height: 42px; }
+  input, select, textarea { font-size: 16px; min-height: 42px; }
+  textarea { min-height: 78px; }
+  .task { grid-template-columns: 22px minmax(0,1fr) auto; gap: 7px; padding: 10px 8px; }
+  .task .taskname { font-size: 12px; overflow-wrap: anywhere; }
+  .task .meta { line-height: 1.4; overflow-wrap: anywhere; }
+  .task .pill { justify-self: start; }
+  .task .taskactions { grid-column: 2 / -1; grid-row: auto; justify-content: flex-end; }
+  .task .taskactions .btn { min-height: 34px; }
+  .hourrow { grid-template-columns: minmax(0,1fr); gap: 6px; padding: 12px 0; }
+  .hourtime { font-size: 12px; padding: 0; }
+  .hourrow > div:not(.hourtime) { min-width: 0; }
+  .hourrow textarea { min-height: 56px; }
+  .hourrow .statusfield { grid-column: auto; }
+  .tablewrap { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table { min-width: 620px; }
+  .calgrid { gap: 3px; }
+  .calgrid button { width: 34px; height: 34px; }
+  .reviewgrid { grid-template-columns: minmax(0,1fr); }
+  .backupbox { padding: 13px; }
+  .backupbox .actions { display: grid; grid-template-columns: 1fr; }
+  .backupbox .btn { width: 100%; }
+  .notice { line-height: 1.5; }
+}
+@media (max-width: 380px) {
+  .app { padding-left: 8px; padding-right: 8px; }
+  .cards4 { gap: 7px; }
+  .stat span { font-size: 11px; }
+  .stat strong { font-size: 21px; }
+  .navlinks button { min-width: 58px; font-size: 9px; padding-left: 5px; padding-right: 5px; }
+  .formgrid { grid-template-columns: 1fr; }
+  .field.span2, .field.full { grid-column: auto; }
+}
+
+</style></head><body><div class="app">
 <header class="topnav"><div class="brand"><div class="logo">➤</div>OfficeFlow</div><div class="navlinks" id="nav"><button data-page="dashboard" class="active">Dashboard</button><button data-page="hourly">Hourly Report</button><button data-page="tasks">My Tasks</button><button data-page="calendar">Calendar</button><button data-page="review">Daily Review</button><button data-page="backup">Backup & Settings</button></div><div class="search">⌕ <input id="globalSearch" placeholder="Search tasks"></div><button class="iconbtn no-print" id="saveIcon" title="Save">✓</button></header>
 <main>
 <section class="page active" id="page-dashboard"><div class="pagehead"><div><h1 id="welcome">Good morning!</h1><p>Office overview · <span id="dashDate"></span></p></div><div class="actions"><input type="date" id="dashDatePicker" style="width:auto"><button class="btn" id="dashAdd">＋ Add Task</button></div></div>
@@ -39,7 +100,7 @@ label{font-size:12px;font-weight:700;color:#687284;display:block;margin:0 0 5px}
 
 <section class="page" id="page-hourly"><div class="pagehead"><div><h1>Hourly Work Report</h1><p>Plan your work and record what actually happened, 8 AM–6 PM.</p></div><div class="actions"><input type="date" id="hourDate" style="width:auto"><button class="btn" id="saveHourly">Save Report</button></div></div><div class="card"><div class="cardhead"><h2>Daily hourly log</h2><span class="muted" id="hourCount">0 of 10 updated</span></div><div id="hourRows"></div></div></section>
 
-<section class="page" id="page-tasks"><div class="pagehead"><div><h1>My Office Tasks</h1><p>Create and track your office work with priority and due time.</p></div><button class="btn" id="newTask">＋ Add Task</button></div><div class="card" style="margin-bottom:15px"><div class="formgrid"><div class="field span2"><label>Task name</label><input id="taskName" placeholder="Enter task"></div><div class="field"><label>Work area</label><select id="taskArea"><option>Production</option><option>CNC / Turning</option><option>Grinding</option><option>Quality</option><option>Accounts</option><option>Maintenance</option><option>Staff</option><option>Other</option></select></div><div class="field"><label>Priority</label><select id="taskPriority"><option>High</option><option selected>Medium</option><option>Low</option></select></div><div class="field"><label>Due date</label><input type="date" id="taskDueDate"></div><div class="field"><label>Due time</label><input type="time" id="taskDueTime"></div><div class="field"><label>Assigned to (optional)</label><input id="taskOwner" placeholder="Name"></div><div class="field"><button class="btn" id="addTask">Add Task</button></div></div></div><div class="card"><div class="cardhead"><h2>Task Register</h2><div class="actions"><select id="taskFilter" style="width:auto"><option value="all">All tasks</option><option value="pending">Pending</option><option value="done">Completed</option></select><input id="taskSearch" placeholder="Search tasks" style="width:180px"></div></div><div id="taskList" class="tasklist"></div></div></section>
+<section class="page" id="page-tasks"><div class="pagehead"><div><h1>My Office Tasks</h1><p>Create and track your office work with priority and due time.</p></div><button class="btn" id="newTask">＋ Add Task</button></div><div class="card" style="margin-bottom:15px"><div class="formgrid"><div class="field span2"><label>Task name</label><input id="taskName" placeholder="Enter task"></div><div class="field"><label>Work area</label><select id="taskArea"><option>Production</option><option>CNC / Turning</option><option>Grinding</option><option>Quality</option><option>Accounts</option><option>Maintenance</option><option>Staff</option><option>Other</option></select></div><div class="field"><label>Priority</label><select id="taskPriority"><option>High</option><option selected>Medium</option><option>Low</option></select></div><div class="field"><label>Due date</label><input type="date" id="taskDueDate"></div><div class="field"><label>Due time</label><input type="time" id="taskDueTime"></div><div class="field"><label>Assigned to (optional)</label><input id="taskOwner" placeholder="Name"></div><div class="field"><button class="btn" id="addTask">Add Task</button></div></div></div><div class="card"><div class="cardhead"><h2>Task Register</h2><div class="actions"><select id="taskFilter" style="width:auto"><option value="pending" selected>Pending tasks</option><option value="all">All tasks</option><option value="done">Completed tasks</option></select><input id="taskSearch" placeholder="Search tasks" style="width:180px"></div></div><div id="taskList" class="tasklist"></div></div></section>
 
 <section class="page" id="page-calendar"><div class="pagehead"><div><h1>Calendar & Daily Reports</h1><p>Select any date to open or create that day's office report.</p></div><button class="btn" id="calendarToday">Go to Today</button></div><div class="grid cols-main"><div class="card"><div class="cal-head"><button id="monthPrev">‹ Previous</button><strong id="monthLabel"></strong><button id="monthNext">Next ›</button></div><div class="calgrid" id="calendarGrid"></div></div><div class="card"><h2 id="selectedDateTitle">Selected date</h2><p class="muted" id="selectedDateInfo"></p><div class="actions"><button class="btn" id="openSelected">Open Daily Report</button><button class="btn secondary" id="createSelected">Create / Save Date</button></div></div></div><div class="card" style="margin-top:16px"><h2>Saved report dates</h2><div id="savedDates" class="actions"></div></div></section>
 
@@ -60,11 +121,11 @@ function persist(d=selected){db[d]=collect(d);localStorage.setItem(DBKEY,JSON.st
 function collect(d=selected){let r=get(d);if(d===selected){if($('page-hourly').classList.contains('active'))r.hours=slots.map((_,i)=>({plan:$('plan'+i)?.value||'',actual:$('actual'+i)?.value||'',status:$('status'+i)?.value||'Not started'}));if($('page-tasks').classList.contains('active'))r.tasks=[...document.querySelectorAll('#taskList .task')].map(el=>({id:el.dataset.id,name:el.querySelector('.taskname').textContent,area:el.dataset.area,priority:el.dataset.priority,dueDate:el.dataset.duedate,dueTime:el.dataset.duetime,owner:el.dataset.owner,done:el.querySelector('input[type=checkbox]').checked}));if($('page-review').classList.contains('active')){r.reviewDone=$('reviewDone').value;r.reviewPending=$('reviewPending').value;r.reviewTomorrow=$('reviewTomorrow').value;r.reviewNotes=$('reviewNotes').value}}return r}
 function switchPage(name){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));if(name==='dashboard')renderDashboard();if(name==='hourly')renderHourly();if(name==='tasks')renderTasks();if(name==='calendar')renderCalendar();if(name==='review')renderReview();if(name==='backup')renderBackup();window.scrollTo(0,0)}
 $('nav').addEventListener('click',e=>{let b=e.target.closest('[data-page]');if(b){persist();switchPage(b.dataset.page)}});document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>{persist();switchPage(b.dataset.goto)});
-function renderDashboard(){let r=get(),done=r.tasks.filter(t=>t.done).length,h=r.hours.filter(x=>x.plan||x.actual).length;let now=new Date().getHours();$('welcome').textContent=now<12?'Good morning!':now<17?'Good afternoon!':'Good evening!';$('dashDate').textContent=new Date(selected+'T12:00:00').toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'});$('dashDatePicker').value=selected;$('statTotal').textContent=r.tasks.length;$('statPending').textContent=r.tasks.length-done;$('statDone').textContent=done;$('statHours').textContent=h+'/10';$('dashTasks').innerHTML=r.tasks.length?r.tasks.slice(0,6).map(taskHTML).join(''):'<div class="empty">No tasks for this date yet.</div>';$('hourProgress').innerHTML=slots.map((s,i)=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:11px"><span class="muted">${s}</span><strong>${r.hours[i].status==='Completed'?'Completed':r.hours[i].plan||r.hours[i].actual?'Updated':'—'}</strong></div>`).join('')}
+function renderDashboard(){let r=get(),done=r.tasks.filter(t=>t.done).length,h=r.hours.filter(x=>x.plan||x.actual).length;let now=new Date().getHours();$('welcome').textContent=now<12?'Good morning!':now<17?'Good afternoon!':'Good evening!';$('dashDate').textContent=new Date(selected+'T12:00:00').toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'});$('dashDatePicker').value=selected;$('statTotal').textContent=r.tasks.length;$('statPending').textContent=r.tasks.length-done;$('statDone').textContent=done;$('statHours').textContent=h+'/10';let pendingTasks=r.tasks.filter(t=>!t.done);$('dashTasks').innerHTML=pendingTasks.length?pendingTasks.slice(0,6).map(taskHTML).join(''):'<div class="empty">No pending tasks. Great work!</div>';$('hourProgress').innerHTML=slots.map((s,i)=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:11px"><span class="muted">${s}</span><strong>${r.hours[i].status==='Completed'?'Completed':r.hours[i].plan||r.hours[i].actual?'Updated':'—'}</strong></div>`).join('')}
 function renderHourly(){let r=get();$('hourDate').value=selected;$('hourRows').innerHTML=slots.map((s,i)=>`<div class="hourrow"><div class="hourtime">${s}</div><div><label>Planned activity</label><textarea id="plan${i}" placeholder="What do you plan to do?">${esc(r.hours[i].plan)}</textarea></div><div><label>Actual work done</label><textarea id="actual${i}" placeholder="What actually got done?">${esc(r.hours[i].actual)}</textarea></div><div class="statusfield"><label>Status</label><select id="status${i}">${['Not started','In progress','Completed','Carried forward'].map(x=>`<option ${r.hours[i].status===x?'selected':''}>${x}</option>`).join('')}</select></div></div>`).join('');hourCount()}
 function hourCount(){let n=slots.filter((_,i)=>$('plan'+i)?.value.trim()||$('actual'+i)?.value.trim()).length;if($('hourCount'))$('hourCount').textContent=n+' of 10 updated'}
 function taskHTML(t){return `<div class="task ${t.done?'done':''}" data-id="${esc(t.id)}" data-area="${esc(t.area)}" data-priority="${esc(t.priority)}" data-duedate="${esc(t.dueDate||'')}" data-duetime="${esc(t.dueTime||'')}" data-owner="${esc(t.owner||'')}"><input type="checkbox" ${t.done?'checked':''}><div><div class="taskname">${esc(t.name)}</div><div class="meta">${esc(t.area)}${t.dueDate?' · '+esc(t.dueDate):''}${t.dueTime?' '+esc(t.dueTime):''}${t.owner?' · '+esc(t.owner):''}</div></div><span class="pill ${t.done?'complete':''}">${t.done?'Completed':'Pending'}</span><span class="pill priority ${String(t.priority).toLowerCase()}">${esc(t.priority)}</span><div class="actions taskactions"><button class="btn neutral small editTask">Edit</button><button class="btn danger small deleteTask">×</button></div></div>`}
-function renderTasks(){let r=get(),q=($('taskSearch')?.value||$('globalSearch').value).toLowerCase(),f=$('taskFilter')?.value||'all';let list=r.tasks.filter(t=>(f==='all'||(f==='done'?t.done:!t.done))&&(!q||[t.name,t.area,t.owner].join(' ').toLowerCase().includes(q)));$('taskList').innerHTML=list.length?list.map(taskHTML).join(''):'<div class="empty">No matching tasks. Add a new office task.</div>'}
+function renderTasks(){let r=get(),q=($('taskSearch')?.value||$('globalSearch').value).toLowerCase(),f=$('taskFilter')?.value||'pending';let all=r.tasks;$('taskList').innerHTML=all.length?all.map(t=>{let matches=(f==='all'||(f==='done'?t.done:!t.done))&&(!q||[t.name,t.area,t.owner].join(' ').toLowerCase().includes(q));return taskHTML(t).replace('<div class="task ','<div style="display:'+(matches?'grid':'none')+'" class="task ')}).join(''):'<div class="empty">No tasks added yet. Add a new office task.</div>';if(all.length&&!all.some(t=>(f==='all'||(f==='done'?t.done:!t.done))&&(!q||[t.name,t.area,t.owner].join(' ').toLowerCase().includes(q))))$('taskList').insertAdjacentHTML('beforeend','<div class="empty">No '+(f==='done'?'completed':f==='pending'?'pending':'matching')+' tasks to show.</div>')}
 function addTask(){let name=$('taskName').value.trim();if(!name){$('taskName').focus();return}let r=get();r.tasks.push({id:Date.now().toString(),name,area:$('taskArea').value,priority:$('taskPriority').value,dueDate:$('taskDueDate').value,dueTime:$('taskDueTime').value,owner:$('taskOwner').value.trim(),done:false});db[selected]=r;localStorage.setItem(DBKEY,JSON.stringify(db));['taskName','taskDueDate','taskDueTime','taskOwner'].forEach(k=>$(k).value='');renderTasks();updateAll();toast('Task added.')}
 function updateAll(){renderDashboard();if($('page-backup').classList.contains('active'))renderBackup()}
 function renderReview(){let r=get();$('reviewDate').value=selected;$('reviewDone').value=r.reviewDone||'';$('reviewPending').value=r.reviewPending||'';$('reviewTomorrow').value=r.reviewTomorrow||'';$('reviewNotes').value=r.reviewNotes||'';let d=r.tasks.filter(t=>t.done).length;$('reviewSummary').textContent=`${d} of ${r.tasks.length} tasks completed. ${r.hours.filter(x=>x.plan||x.actual).length} of 10 hourly slots have entries.`}
@@ -82,12 +143,4 @@ $('hourRows').addEventListener('input',()=>{hourCount();let r=collect();db[selec
 $('monthPrev').onclick=()=>{calMonth.setMonth(calMonth.getMonth()-1);renderCalendar()};$('monthNext').onclick=()=>{calMonth.setMonth(calMonth.getMonth()+1);renderCalendar()};$('calendarGrid').onclick=e=>{let b=e.target.closest('[data-date]');if(b){calSelected=b.dataset.date;renderCalendar()}};$('openSelected').onclick=()=>{persist();selected=calSelected;switchPage('dashboard')};$('createSelected').onclick=()=>{calSelected=calSelected;selected=calSelected;if(!db[selected])db[selected]=blank();localStorage.setItem(DBKEY,JSON.stringify(db));renderCalendar();toast('Date report ready.')};$('calendarToday').onclick=()=>{calSelected=today();calMonth=new Date();renderCalendar()};$('savedDates').onclick=e=>{let b=e.target.closest('[data-open-date]');if(b){calSelected=b.dataset.openDate;renderCalendar()}};
 $('exportBackup').onclick=backupDownload;$('exportCurrentCsv').onclick=exportCSV;$('mergeBackup').onclick=()=>importBackup(false);$('replaceBackup').onclick=()=>{if(confirm('Replace all current records with the selected backup? Export a backup first if needed.'))importBackup(true)};$('printPage').onclick=()=>window.print();$('clearAll').onclick=()=>{if(confirm('Permanently delete all OfficeFlow records from this browser?')){db={};localStorage.removeItem(DBKEY);renderBackup();switchPage('dashboard');toast('Local records deleted.')}};
 renderDashboard();renderHourly();renderTasks();renderCalendar();renderReview();renderBackup();
-</script>
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(err => console.log("Offline setup unavailable:", err));
-  });
-}
-</script>
-</body></html>
+</script></body></html>
